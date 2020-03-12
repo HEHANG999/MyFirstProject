@@ -10,5 +10,8 @@
         <module name="SpringService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="xxx" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

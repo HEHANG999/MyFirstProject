@@ -17,6 +17,22 @@ public class StudentServiceImpl implements IStudentService {
     private IStudentMapper mapper;
 
     @Override
+    public void add(StudentBean student) {
+        //int a = 9/0;
+        mapper.add(student);
+    }
+
+    @Override
+    public void del(int id) {
+        mapper.del(id);
+    }
+
+    @Override
+    public void update(int id, String name) {
+        mapper.update(id, name);
+    }
+
+    @Override
     public List<StudentBean> findAll() {
         return mapper.findAll();
     }

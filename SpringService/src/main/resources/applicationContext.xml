@@ -17,6 +17,7 @@
                             http://www.springframework.org/schema/mvc   
 							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+
 	<!--配置数据源-->
 	<bean id="data" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -41,7 +42,7 @@
 		<property name="typeAliasesPackage" value="com.project.bean"/>
 		<property name="mapperLocations">
 			<list>
-				<value>orm/*.xml</value>
+				<value>classpath:orm/*.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -57,10 +58,23 @@
 		<property name="dataSource" ref="data"/>
 	</bean>
 
-	<!--允许注解配置事务-->
-	<tx:annotation-driven transaction-manager="trans"/>
+	<!--方法一、允许注解配置事务-->
+	<!--<tx:annotation-driven transaction-manager="trans"/>-->
+
+	<!--方法二、直接配置事务-->
+	<tx:advice id="xxx" transaction-manager="trans">
+		<tx:attributes>
+			<tx:method name="*find" read-only="true"/><!--所有以find结尾的方法都只读-->
+			<tx:method name="*" rollback-for="Exception"/><!--所有方法发生异常是回滚-->
+		</tx:attributes>
+	</tx:advice>
+
+	<!--通过aop把事务通知放到目标方法-->
+	<aop:config>
+		<aop:advisor advice-ref="xxx" pointcut="execution(* com.project.service..*.*(..))"/>
+	</aop:config>
 
 	<!--扫包-->
-	<context:component-scan base-package="com.project.service"/>
+	<context:component-scan base-package="com.project.service,com.project.controller"/>
 	
 </beans>

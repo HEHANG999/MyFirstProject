@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+
+   <div id="vid">
+       {{info}}
+       <input type="button" value="点击" @click="getA">
+   </div>
+
+   <script>//注意顺序
+       new Vue({
+           el:"#vid",//找到上面的id
+           data:{
+               info:"hellow,Vue!"
+           },
+           
+           methods:{
+               getA:function () {
+                   //发送get请求
+                   this.$http.get('stu/test').then(function(info){
+                       var r = info.body
+                       alert(r)
+                   },function(){
+                       console.log('请求失败处理了。。');
+                   })
+               }
+           }
+       });
+   </script>
+
+
+</body>
+</html>
