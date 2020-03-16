@@ -17,8 +17,12 @@
         <!--create  启动hibernate时删除数据库所有表，重新建-->
         <property name="hbm2ddl.auto">update</property>
 
+        <!--显示hibernate执行的sql语句，类似日志输出-->
+        <property name="hibernate.show_sql">true</property><!--测试时可打印，尽量部署时不打印，因为占虚拟机内存-->
+
         <!--把orm交给hibernate，自动建表-->
         <mapping class="com.project.hibernate.bean.UserBean"></mapping>
+        <mapping class="com.project.hibernate.bean.RoleBean"></mapping>
 
     </session-factory>
 </hibernate-configuration>

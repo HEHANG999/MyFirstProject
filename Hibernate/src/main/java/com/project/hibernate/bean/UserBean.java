@@ -1,14 +1,13 @@
 package com.project.hibernate.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity//被hibernate管理的标记
-@Table(name = "t_user")//映射表,不写默认类名为表名
+@Table(name = "t_user")//映射表,不写name默认类名为表名，不写table就不会将实体映射到数据库
 public class UserBean {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//生成策略---为mysql的自动增长
     private int id;
 
     private String name;//列名

@@ -1,5 +1,4 @@
 package test;
-
 import com.project.bibernate.tool.HSession;
 import com.project.hibernate.bean.UserBean;
 import org.hibernate.Session;
@@ -8,16 +7,16 @@ import org.junit.Test;
 
 public class UserTest {
 
-    @Test
+    //@Test
     public void test1(){
         System.out.println(HSession.createSession());
     }
 
 
-    //@Test
+    @Test
     public void test2(){
         UserBean user = new UserBean();
-        user.setId(1);
+        //user.setId(1);
         user.setName("丽丽");
         user.setPass("777");
         user.setAge(20);
