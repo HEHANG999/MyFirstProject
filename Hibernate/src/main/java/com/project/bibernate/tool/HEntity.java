@@ -22,9 +22,8 @@ public class HEntity {
         role.setName("教师");
         //操作数据库
         Transaction tr = session.getTransaction();
-        //---------------------------持久状态
         tr.begin();
-
+        //---------------------------持久状态
         session.save(role);//保存数据库中（DB）
         //操作持久状态
         role.setName("学生");//修改的是缓存（一级缓存）中的数据
@@ -32,7 +31,7 @@ public class HEntity {
         tr.commit();//提交时，缓存会和数据库同步，若不一致就会update数据库----【前提有事务Transaction支持】
         //---------------------------持久状态
         session.close();
-        //游离状态
+        //游离状态---与数据库断开了连接，session缓存也没有，这时改变数据不会同步数据库了
     }
 
     //@Test

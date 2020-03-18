@@ -7,13 +7,13 @@ import org.junit.Test;
 
 public class UserTest {
 
-    //@Test
+    @Test
     public void test1(){
         System.out.println(HSession.createSession());
     }
 
 
-    @Test
+    //@Test
     public void test2(){
         UserBean user = new UserBean();
         //user.setId(1);
