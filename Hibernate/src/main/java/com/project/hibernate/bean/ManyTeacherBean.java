@@ -1,17 +1,15 @@
 package com.project.hibernate.bean;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
 
 /**
- * 教师实体类
+ * 用hibernate演示注解中间表
  */
 @Entity
-@Table(name = "t_teacher")
-public class TeacherBean {
-
+@Table(name = "m_teacher")
+public class ManyTeacherBean {
     @Id
     @Column(name = "t_id",length = 32)
     @GenericGenerator(name = "uu",strategy = "uuid")
@@ -19,12 +17,12 @@ public class TeacherBean {
     private String id;
     @Column(name = "t_name",length = 48)
     private String name;
-    @Column(name = "t_class",length = 48)
-    private String clas;
 
-    //mappedBy 把映射权利交给多的一方，表示把setStus这个属性的维护权交给---StudentBean中的"teacher"属性
-    @OneToMany(mappedBy = "teacher")
-    private Set<StudentBean> setStus;
+    @ManyToMany//多对多
+    @JoinTable(name = "m_s_t",joinColumns = {@JoinColumn(name = "fk_s")},inverseJoinColumns = {@JoinColumn(name = "fk_t")})
+    private Set<ManyStudentBean> studentSet;
+
+    //因为另一个类中已经注解了中间表，所以这个类只引用就行了
 
 
     public String getId() {
@@ -43,19 +41,11 @@ public class TeacherBean {
         this.name = name;
     }
 
-    public String getClas() {
-        return clas;
+    public Set<ManyStudentBean> getStudentSet() {
+        return studentSet;
     }
 
-    public void setClas(String clas) {
-        this.clas = clas;
-    }
-
-    public Set<StudentBean> getSetStus() {
-        return setStus;
-    }
-
-    public void setSetStus(Set<StudentBean> setStus) {
-        this.setStus = setStus;
+    public void setStudentSet(Set<ManyStudentBean> studentSet) {
+        this.studentSet = studentSet;
     }
 }

@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Teacher_Student {
+public class Teacher_Student_Test {
     Session session = null;
     Transaction tr = null;
 

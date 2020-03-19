@@ -25,6 +25,8 @@
         <mapping class="com.project.hibernate.bean.RoleBean"></mapping>
         <mapping class="com.project.hibernate.bean.TeacherBean"></mapping>
         <mapping class="com.project.hibernate.bean.StudentBean"></mapping>
+        <mapping class="com.project.hibernate.bean.ManyStudentBean"></mapping>
+        <mapping class="com.project.hibernate.bean.ManyTeacherBean"></mapping>
 
     </session-factory>
 </hibernate-configuration>
