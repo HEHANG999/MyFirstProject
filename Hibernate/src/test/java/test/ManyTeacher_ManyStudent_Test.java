@@ -62,7 +62,7 @@ public class ManyTeacher_ManyStudent_Test {
     }
 
     @Test
-    public void addTeacherAndStudent(){//添加中间表，这里好像不能添加进去！
+    public void addTeacherAndStudent(){//添加中间表，这里好像不能添加进去！因为没有写中间表实体，没有被hibernate管理
         ManyTeacherBean teacher = session.get(ManyTeacherBean.class, "4028821870f0d06d0170f0d06ef50000");
 
         ManyStudentBean student1 = session.get(ManyStudentBean.class, "4028821870f0d06d0170f0d06eff0003");
