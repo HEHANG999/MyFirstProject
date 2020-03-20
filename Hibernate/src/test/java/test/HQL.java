@@ -2,6 +2,8 @@ package test;
 import com.project.bibernate.tool.HSession;
 import com.project.bibernate.tool.ManyTeacherDto;
 import com.project.hibernate.bean.ManyTeacherBean;
+import com.project.hibernate.bean.StudentBean;
+import com.project.hibernate.bean.TeacherBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -24,11 +26,13 @@ public class HQL {
         session = HSession.createSession();
         tr = session.getTransaction();
         tr.begin();
+        //System.out.println("事务开启了...");
     }
     @After
     public void after(){
         tr.commit();
         session.close();
+        //System.out.println("事务关闭了...");
     }
 
     @Test
@@ -111,5 +115,98 @@ public class HQL {
         }
 
     }
+
+    @Test
+    public void findLike(){//HQL模糊查询
+
+        /*String hql = " select new map(id,name) " +
+                " from ManyTeacherBean where name like '%何%'";//方法一
+
+        List<Map> list = session.createQuery(hql).list();*/
+
+        String hql = " select new map(id,name) " +
+                " from ManyTeacherBean where name like ?";//方法二
+
+        List<Map> list = session.createQuery(hql).setParameter(0, "%何%").list();
+
+        for (Map map:list){
+            System.out.println(map.get("0")+";"+map.get("1"));
+        }
+    }
+
+
+
+
+
+
+
+    @Test
+    public void findJoin(){//HQL联表查询
+        String hql = "select new Map(s.name,t.name,t.clas) from StudentBean s left join s.teacher t where t.name=?";
+
+        List<Map> list = session.createQuery(hql).setParameter(0, "陈老师").list();
+
+        for (Map map:list) {
+            System.out.println(map.get("0"));
+        }
+
+    }
+
+
+    @Test
+    public void findPage(){//演示HQL分页查询
+        int currPage = 1;
+        int number = 2;
+
+        String hql = "from StudentBean";
+
+        List<StudentBean> list = session.createQuery(hql)
+                .setFirstResult((currPage-1)*number)//起始位置
+                .setMaxResults(number)//每页显示行数
+                .list();
+
+        for (StudentBean stu:list) {
+            System.out.println(stu.getName());
+        }
+
+    }
+
+
+
+    @Test
+    public void findObj(){//查询对象
+        String hql = "from TeacherBean where name=?";
+
+        TeacherBean t = (TeacherBean) session.createQuery(hql)
+                .setParameter(0, "陈老师").uniqueResult();//表示唯一对象
+
+        System.out.println(t.getName());
+
+    }
+
+
+    @Test
+    public void del(){//删除
+        String hql = "delete from StudentBean where name=?";
+
+        int i = session.createQuery(hql)
+                .setParameter(0, "小子3").executeUpdate();//表示执行修改、删除后返回受影响的行数
+
+        System.out.println(i);
+
+    }
+
+    @Test
+    public void update(){//修改
+        String hql = "update StudentBean set name = ? where name = ?";
+
+        int i = session.createQuery(hql)
+                .setParameter(0, "小子22")
+                .setParameter(1, "小子22").executeUpdate();
+
+        System.out.println(i);
+
+    }
+
 
 }
