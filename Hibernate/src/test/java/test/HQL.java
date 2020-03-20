@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 演示用HQL查询
+ * 演示HQL语句
  */
 public class HQL {
     Session session = null;
