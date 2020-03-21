@@ -90,7 +90,7 @@ public class HQL {
     }
 
     @Test
-    public void findByName2(){//2、用Dto类来装数据
+    public void findByName2(){//2、用Dto来装数据-----hql语句的Dto面向对象，直接new Dto对象
         String hql = " select new com.project.bibernate.tool.ManyTeacherDto(id,name) " +
                      " from ManyTeacherBean where name = ?";
 
@@ -111,7 +111,7 @@ public class HQL {
         List<Map> list = session.createQuery(hql).list();
 
         for (Map map:list){
-            System.out.println(map.get("0")+";"+map.get("1"));
+            System.out.println(map.get("0")+";"+map.get("1"));//hql语句中的map保存的键，是索引
         }
 
     }
@@ -150,8 +150,8 @@ public class HQL {
             System.out.println(map.get("0"));
         }
 
-    }
 
+    }
 
     @Test
     public void findPage(){//演示HQL分页查询
@@ -171,14 +171,12 @@ public class HQL {
 
     }
 
-
-
     @Test
     public void findObj(){//查询对象
         String hql = "from TeacherBean where name=?";
 
         TeacherBean t = (TeacherBean) session.createQuery(hql)
-                .setParameter(0, "陈老师").uniqueResult();//表示唯一对象
+                .setParameter(0, "陈老师").uniqueResult();//表示返回唯一结果
 
         System.out.println(t.getName());
 
@@ -190,7 +188,8 @@ public class HQL {
         String hql = "delete from StudentBean where name=?";
 
         int i = session.createQuery(hql)
-                .setParameter(0, "小子3").executeUpdate();//表示执行修改、删除后返回受影响的行数
+                .setParameter(0, "小子3")
+                .executeUpdate();//表示执行修改、删除后返回受影响的行数
 
         System.out.println(i);
 
@@ -202,7 +201,8 @@ public class HQL {
 
         int i = session.createQuery(hql)
                 .setParameter(0, "小子22")
-                .setParameter(1, "小子22").executeUpdate();
+                .setParameter(1, "小子22")
+                .executeUpdate();
 
         System.out.println(i);
 
