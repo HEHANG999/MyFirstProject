@@ -1,6 +1,6 @@
-package com.project.bibernate.tool;
+package com.project.tool;
 
-import com.project.hibernate.bean.RoleBean;
+import com.project.bean.RoleBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Before;

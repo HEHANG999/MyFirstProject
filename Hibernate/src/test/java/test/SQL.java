@@ -1,8 +1,8 @@
 package test;
-import com.project.bibernate.tool.HSession;
-import com.project.bibernate.tool.ManyTeacherDto;
-import com.project.hibernate.bean.StudentBean;
-import com.project.hibernate.bean.TeacherBean;
+import com.project.tool.HSession;
+import com.project.tool.ManyTeacherDto;
+import com.project.bean.StudentBean;
+import com.project.bean.TeacherBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;

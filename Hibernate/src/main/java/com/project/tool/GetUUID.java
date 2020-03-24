@@ -1,4 +1,4 @@
-package com.project.bibernate.tool;
+package com.project.tool;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.project.hibernate.bean;
+package com.project.bean;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

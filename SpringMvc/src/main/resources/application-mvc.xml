@@ -16,8 +16,11 @@
                             http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                             http://www.springframework.org/schema/mvc   
 							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!--提供springMVC注解和类型转换器支持-->
 	<mvc:annotation-driven/>
-	
+
+	<!--静态资源交给web容器处理，容器和servlet不处理了-->
 	<mvc:default-servlet-handler/>
 	
 	<context:component-scan base-package="com.project.service"/>

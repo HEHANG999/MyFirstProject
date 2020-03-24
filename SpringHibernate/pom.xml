@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Hibernate</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>HiSpringMybatis</artifactId>
+
 
     <dependencies>
 
@@ -43,7 +43,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-java8</artifactId>
@@ -51,18 +50,12 @@
         </dependency>
 
         <!--jpa-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.0.1.RELEASE</version>
-        </dependency>
+        </dependency>-->
 
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>5.2.2.RELEASE</version>
-        </dependency>
 
     </dependencies>
 

@@ -12,6 +12,8 @@
         <module>SpringMvc</module>
         <module>SpringService</module>
         <module>Hibernate</module>
+        <module>SpringHibernate</module>
+        <module>SpringDataJPA</module>
     </modules>
 
     <properties>
@@ -161,6 +163,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--httpclient（前后端分离，获得http客户端，对于浏览器是后端，对于后端服务器属于客户端）-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

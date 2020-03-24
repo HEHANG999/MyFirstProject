@@ -1,7 +1,7 @@
 package test;
-import com.project.bibernate.tool.HSession;
-import com.project.hibernate.bean.ManyStudentBean;
-import com.project.hibernate.bean.ManyTeacherBean;
+import com.project.tool.HSession;
+import com.project.bean.ManyStudentBean;
+import com.project.bean.ManyTeacherBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.After;

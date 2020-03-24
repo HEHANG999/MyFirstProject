@@ -20,13 +20,16 @@
         <!--显示hibernate执行的sql语句，类似日志输出-->
         <property name="hibernate.show_sql">true</property><!--测试时可打印，尽量部署时不打印，因为占虚拟机内存-->
 
+        <!--更美观sql-->
+        <property name="format_sql">true</property>
+
         <!--把orm交给hibernate，自动建表-->
-        <mapping class="com.project.hibernate.bean.UserBean"></mapping>
-        <mapping class="com.project.hibernate.bean.RoleBean"></mapping>
-        <mapping class="com.project.hibernate.bean.TeacherBean"></mapping>
-        <mapping class="com.project.hibernate.bean.StudentBean"></mapping>
-        <mapping class="com.project.hibernate.bean.ManyStudentBean"></mapping>
-        <mapping class="com.project.hibernate.bean.ManyTeacherBean"></mapping>
+        <mapping class="com.project.bean.UserBean"></mapping>
+        <mapping class="com.project.bean.RoleBean"></mapping>
+        <mapping class="com.project.bean.TeacherBean"></mapping>
+        <mapping class="com.project.bean.StudentBean"></mapping>
+        <mapping class="com.project.bean.ManyStudentBean"></mapping>
+        <mapping class="com.project.bean.ManyTeacherBean"></mapping>
 
     </session-factory>
 </hibernate-configuration>

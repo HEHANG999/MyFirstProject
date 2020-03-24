@@ -1,4 +1,4 @@
-package com.project.bibernate.tool;
+package com.project.tool;
 
 /**
  * 用于保存数据

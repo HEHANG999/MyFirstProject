@@ -1,4 +1,4 @@
-package com.project.bibernate.tool;
+package com.project.tool;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,7 @@ public class HSession {
 
     static {
             final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                    .configure("bibernate.xml").build();
+                    .configure("hibernate.xml").build();
             try {
                 sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
             }

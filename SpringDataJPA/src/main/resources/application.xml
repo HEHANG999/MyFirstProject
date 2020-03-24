@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+         					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context-4.0.xsd
+							http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                            http://www.springframework.org/schema/mvc   
+							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:component-scan base-package="com.project"/>
+	<context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+	<!--数据源-->
+	<bean id="data" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${jdbc_driver}"/>
+		<property name="url" value="${jdbc_url}"/>
+		<property name="username" value="${jdbc_user}"/>
+		<property name="password" value="${jdbc_password}"/>
+
+		<property name="initialSize" value="5"/>
+		<property name="maxActive" value="100"/>
+		<property name="minIdle" value="20"/>
+		<property name="maxWait" value="1000"/>
+	</bean>
+
+	<!--Jpa工厂-->
+	<bean id="managerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!--数据源-->
+		<property name="dataSource" ref="data"/>
+		<!--JPA产品适配器-->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+		</property>
+		<!--管理实体-->
+		<property name="packagesToScan" value="com.project.bean"></property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.format_sql">${format_sql}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--适配器-->
+	<bean id="VendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform" value="${hibernate.dialect}"></property>
+	</bean>
+
+
+	<!--Jpa事务管理器-->
+	<bean id="trans" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="managerFactoryBean"></property>
+	</bean>
+
+	<!--允许注解配置事务-->
+	<tx:annotation-driven transaction-manager="trans"></tx:annotation-driven>
+	
+</beans>

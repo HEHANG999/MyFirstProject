@@ -1,6 +1,6 @@
 package test;
-import com.project.bibernate.tool.HSession;
-import com.project.hibernate.bean.RoleBean;
+import com.project.tool.HSession;
+import com.project.bean.RoleBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -43,7 +43,6 @@ public class RoleTest {
         //游离状态
 
     }
-
 
 
 }

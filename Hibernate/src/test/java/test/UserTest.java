@@ -1,6 +1,6 @@
 package test;
-import com.project.bibernate.tool.HSession;
-import com.project.hibernate.bean.UserBean;
+import com.project.tool.HSession;
+import com.project.bean.UserBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
