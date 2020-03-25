@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:p="http://www.springframework.org/schema/p"
-        xmlns="http://www.springframework.org/schema/beans"
-        xmlns:aop="http://www.springframework.org/schema/aop"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:mvc="http://www.springframework.org/schema/mvc"
-        xmlns:tx="http://www.springframework.org/schema/tx"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
          					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 							http://www.springframework.org/schema/tx 
 							http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
@@ -15,7 +16,9 @@
 							http://www.springframework.org/schema/aop
                             http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                             http://www.springframework.org/schema/mvc   
-							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+							http://www.springframework.org/schema/data/jpa
+							http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<context:component-scan base-package="com.project"/>
 	<context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
@@ -59,12 +62,16 @@
 	</bean>
 
 
+	<!--把工厂交给springdataJPA，并把自定义接口交给springdataJPA-->
+	<jpa:repositories base-package="com.project.dao" entity-manager-factory-ref="managerFactoryBean" transaction-manager-ref="trans"></jpa:repositories>
+
+
 	<!--Jpa事务管理器-->
 	<bean id="trans" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="managerFactoryBean"></property>
 	</bean>
 
 	<!--允许注解配置事务-->
-	<tx:annotation-driven transaction-manager="trans"></tx:annotation-driven>
+	<tx:annotation-driven transaction-manager="trans" proxy-target-class="true"></tx:annotation-driven>
 	
 </beans>

@@ -15,4 +15,6 @@ public class JPATest {
 
         System.out.println(dao.getmanaged());
     }
+
+
 }
