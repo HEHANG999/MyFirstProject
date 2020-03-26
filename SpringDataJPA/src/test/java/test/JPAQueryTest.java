@@ -7,7 +7,10 @@ import com.project.service.IUserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.PageRequest;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +86,95 @@ public class JPAQueryTest {
 
         System.out.println(user.getUserName());
     }
+
+    @Test
+    public void addList(){
+        List<UserBean> list = new ArrayList<UserBean>();
+
+        for (int i = 0; i < 10; i++) {
+
+            UserBean user = new UserBean();
+            user.setUserName("涛涛"+i);
+            user.setLogName("tt"+i);
+            user.setLogPass("77"+i);
+            user.setStatus("在职");
+
+            list.add(user);
+        }
+
+        dao.addList(list);
+    }
+
+
+    @Test
+    public void findPage(){//分页查询
+        PageRequest pageable = PageRequest.of(0, 5);
+
+        List<UserBean> list = dao.getPageList("在职", pageable);
+
+        for (UserBean userBean : list) {
+            System.out.println(userBean.getUserName());
+        }
+    }
+
+
+
+
+
+
+
+
+    @Test
+    public void findListSQL(){//SQL查询
+        List<UserBean> list = dao.findSQLList("在职");
+
+        for (UserBean userBean : list) {
+            System.out.println(userBean.getUserName());
+        }
+    }
+
+
+
+    @Test
+    public void findListObject(){//查询且转换
+        List<UserBean> list = dao.findSQLObject("在职");
+
+        for (UserBean userBean : list) {
+            System.out.println(userBean.getUserName()+";"+userBean.getLogPass()+";"+userBean.getLogName());
+        }
+    }
+
+
+
+    @Test
+    public void delete(){//删除
+        int i = dao.delete("涛涛0");
+
+        System.out.println(i);
+    }
+
+    @Test
+    public void update(){//修改
+        int i = dao.update("在职00", "涛涛1");
+
+        System.out.println(i);
+    }
+
+
+
+
+
+
+    //关键字!
+
+   /* @Test
+    public void findByUserName(){
+        List<UserBean> list = dao.findByUserNameOrLogName("小明","xm");
+
+        for (UserBean userBean : list) {
+            System.out.println(userBean.getUserName());
+        }
+    }*/
 
 
 }
